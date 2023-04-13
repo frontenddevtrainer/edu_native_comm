@@ -14,13 +14,17 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> {
   static const platform = MethodChannel("com.edureka.demo/messages");
+  TextEditingController _a = TextEditingController();
+  TextEditingController _b = TextEditingController();
+
   String _response = "Loading...";
 
   Future<void> _communicate() async {
     String response;
 
     try {
-      response = await platform.invokeMethod("calculate");
+      response = await platform.invokeMethod(
+          "calculate", {"a": _a.text.trim(), "b": _b.text.trim()});
     } catch (e) {
       response = "Error - $e";
     }
@@ -35,7 +39,13 @@ class _ApplicationState extends State<Application> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Column( mainAxisAlignment: MainAxisAlignment.center, children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            TextFormField(
+              controller: _a,
+            ),
+            TextFormField(
+              controller: _b,
+            ),
             Text(_response),
             ElevatedButton(
                 onPressed: () {

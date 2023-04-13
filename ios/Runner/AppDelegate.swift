@@ -16,7 +16,11 @@ import Flutter
       (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
       switch call.method {
       case "calculate":
-        result("Hello world!!!");
+
+        if let args = call.arguments as? [String: Any], let a = args["a"] as? String, let b = args["b"] as? String {
+            result(a + b);
+        }
+
       default:
         result(FlutterMethodNotImplemented)
       }
