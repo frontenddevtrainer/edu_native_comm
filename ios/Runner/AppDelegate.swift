@@ -17,7 +17,7 @@ import Flutter
       switch call.method {
       case "calculate":
 
-        if let args = call.arguments as? [String: Any], let a = args["a"] as? String, let b = args["b"] as? String {
+        if let args = call.arguments as? [String: Any], let a = args["a"] as? Double, let b = args["b"] as? Double {
             result(a + b);
         }
 

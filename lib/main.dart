@@ -23,8 +23,10 @@ class _ApplicationState extends State<Application> {
     String response;
 
     try {
-      response = await platform.invokeMethod(
-          "calculate", {"a": _a.text.trim(), "b": _b.text.trim()});
+      final result = await platform.invokeMethod("calculate",
+          {"a": double.parse(_a.text), "b": double.parse(_b.text)});
+
+      response = "Result: $result";
     } catch (e) {
       response = "Error - $e";
     }
